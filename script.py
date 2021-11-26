@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import sys
-import getopt
 import requests
 import argparse
 from distutils.util import strtobool
@@ -46,6 +45,12 @@ def main() -> int:
                         help="format string")
     parser.add_argument("-io", "--in_orbit_boolean",type=str, default="False",
                         help="Filter by satellites currently in orbit (True) or those that have decayed (False)")
+    parser.add_argument("-nci", '--norad_cat_id_string', type=str, 
+                        help="Select a satellite by its NORAD-assigned identifier")
+    parser.add_argument("-si", '--sat_id_string', type=str, help="Satellite ID")
+    parser.add_argument("-ss", '--satellite_status', type=str, 
+                        help="Filter by satellite status: alive dead future re-entered")
+    
 
 
     args = parser.parse_args()
@@ -53,6 +58,8 @@ def main() -> int:
     #command line flags
     if args.format_string:
         print(args.format_string)
+    if args.norad_cat_id_string:
+        print(args.norad_cat_id_string)
     if args.in_orbit_boolean:
         print(strtobool(args.in_orbit_boolean))
     if args.mode:
